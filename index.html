@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Material Sound — interfaces that sound like objects</title>
+<meta name="description" content="Paper, wood, glass and metal synthesised with Web Audio. No audio files: filtered noise and damped sines.">
+<meta name="theme-color" content="#08090b">
+<link rel="canonical" href="https://vishnuvsdevtech.github.io/material-sound/">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+.pads{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+@media (max-width:700px){.pads{grid-template-columns:repeat(2,1fr)}}
+.pad{position:relative;aspect-ratio:1/.72;border:1px solid var(--line2);border-radius:12px;
+ background:var(--card);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;
+ transition:border-color .15s,transform .06s;overflow:hidden}
+.pad:active{transform:scale(.985)}
+.pad.hit{border-color:var(--acc)}
+.pad b{font:600 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.pad span{font-size:11px;color:var(--muted);margin-top:3px}
+.pad i{position:absolute;inset:auto 14px 14px 14px;height:2px;background:var(--acc);opacity:.25;
+ transform-origin:left;transform:scaleX(0)}
+.pad.hit i{animation:f .5s ease-out}
+@keyframes f{from{transform:scaleX(1);opacity:.8}to{transform:scaleX(0);opacity:0}}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+</style></head>
+<body><div class="wrap">
+<header><h1>Interfaces that sound like <em>objects</em></h1><span class="tag">no audio files · synthesised</span></header>
+<div class="pads" id="pads">
+  <div class="pad" data-mat="paper"><b>Paper</b><span>filtered noise, 40 ms</span><i></i></div>
+  <div class="pad" data-mat="wood"><b>Wood</b><span>180 Hz body + click</span><i></i></div>
+  <div class="pad" data-mat="glass"><b>Glass</b><span>2.4 kHz damped sine</span><i></i></div>
+  <div class="pad" data-mat="metal"><b>Metal</b><span>beating partials, long decay</span><i></i></div>
+</div>
+<div class="row"><button id="toggle" class="on">Sound on</button><span class="tag">click a pad — every sound is generated live</span></div>
+<div class="meter"><span>context <b id="m-state">—</b></span><span>triggered <b id="m-n">0</b></span></div>
+<div class="notes">
+<p>Four materials from two primitives: white noise through a filter (paper, the glass attack) and a damped sine at a chosen frequency (wood, metal). A wood knock is a fast decay at 180 Hz plus a noise transient; a bell is the same sine with a forty-times longer tail and two detuned partials beating against each other.</p>
+<p>Sound is off by default and the toggle is visible, because an interface that makes noise without permission is a bug. 40 ms is the threshold where a click stops feeling like a click and starts feeling like material.</p>
+</div>
+<footer><span>Material Sound · POC</span><span>Web Audio · no assets</span></footer>
+</div>
+<script src="assets/app.js"></script></body></html>
